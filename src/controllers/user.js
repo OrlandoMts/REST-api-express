@@ -1,4 +1,8 @@
 const { request, response } = require("express");
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
+const saltRounds = 10;
 
 const getUser = (req = request, res = response) => {
 	const { query } = req;
@@ -8,12 +12,34 @@ const getUser = (req = request, res = response) => {
 	});
 };
 
-const postUser = (req, res) => {
-	const { body } = req;
-	res.json({
-		msg: "post Hola mundo",
-		body,
-	});
+const postUser = async (req = request, res = response) => {
+	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json(errors);
+		}
+		const { name, email, password, role } = req.body;
+		const user = new User({ name, email, password, role });
+		//NOTE: 1.Verificar el correo. 2.Encriptar password. 3.Insertar en bd
+		// 1
+		const emailRegister = await User.findOne({ email });
+		if (emailRegister) {
+			return res.status(400).json({
+				msg: "El correo ya ha sido registrado",
+			});
+		}
+		// 2
+		const salt = bcrypt.genSaltSync(saltRounds);
+		user.password = bcrypt.hashSync(password, salt);
+		// 3
+		await user.save();
+		res.json({
+			msg: "Bienvenido",
+			user,
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 const putUser = (req = request, res = response) => {
