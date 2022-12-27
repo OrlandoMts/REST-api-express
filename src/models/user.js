@@ -33,4 +33,10 @@ const UserSchema = new Schema({
 	},
 });
 
+// NOTE: debe ser una funcion normal para sobreecribir el metodo (se necesita mantener el this de la instancia)
+UserSchema.methods.toJSON = function () {
+	const { __v, password, ...rest } = this.toObject(); // ...rest: todos las demas propiedades
+	return rest;
+};
+
 module.exports = model("User", UserSchema); //mongoose por defecto le agrega una 's' al final del string -> Users
