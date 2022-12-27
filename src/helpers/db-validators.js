@@ -1,6 +1,12 @@
-const { response } = require("express");
 const Role = require("../models/role");
 const User = require("../models/user");
+
+const isUserById = async (id = "") => {
+	const isUser = await User.findById(id);
+	if (!isUser) {
+		throw new Error("El usuario con ese id no existe");
+	}
+};
 
 const isValidRole = async (role = "") => {
 	const isRole = await Role.findOne({ role });
@@ -12,10 +18,8 @@ const isValidRole = async (role = "") => {
 const isValidEmail = async (email = "") => {
 	const emailRegister = await User.findOne({ email });
 	if (emailRegister) {
-		return res.status(400).json({
-			msg: "El correo ya ha sido registrado",
-		});
+		throw new Error(`El ${email} ya existe en la bd`);
 	}
 };
 
-module.exports = { isValidRole, isValidEmail };
+module.exports = { isUserById, isValidRole, isValidEmail };

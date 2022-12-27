@@ -16,13 +16,11 @@ const postUser = async (req = request, res = response) => {
 	try {
 		const { name, email, password, role } = req.body;
 		const user = new User({ name, email, password, role });
-		//NOTE: 1.Verificar el correo. 2.Encriptar password. 3.Insertar en bd
+		//NOTE: 1.Encriptar password. 3.Insertar en bd
 		// 1
-		isValidEmail(email);
-		// 2
 		const salt = bcrypt.genSaltSync(saltRounds);
 		user.password = bcrypt.hashSync(password, salt);
-		// 3
+		// 2
 		await user.save();
 		res.json({
 			msg: "Bienvenido",
@@ -33,16 +31,23 @@ const postUser = async (req = request, res = response) => {
 	}
 };
 
-const putUser = (req = request, res = response) => {
-	const id = req.params.id;
+const putUser = async (req = request, res = response) => {
 	try {
+		const { id } = req.params;
+		const { _id, password, google, email, ...rest } = req.body;
+		// Valida si viene el password
+		if (password) {
+			const salt = bcrypt.genSaltSync(saltRounds);
+			rest.password = bcrypt.hashSync(password, salt);
+		}
+		const user = await User.findByIdAndUpdate(id, rest);
 		res.json({
-			msg: "put Hola mundo",
-			id,
+			msg: "Usuario actualizado",
+			user,
 		});
 	} catch (error) {
 		res.status(404).json({
-			msg: "No existe esa url",
+			msg: "Contacta al administrador",
 		});
 	}
 };
