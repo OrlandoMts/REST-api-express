@@ -1,15 +1,28 @@
 const { request, response } = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
-const { isValidEmail } = require("../helpers/db-validators");
 const saltRounds = 10;
 
-const getUser = (req = request, res = response) => {
-	const { query } = req;
-	res.json({
-		msg: "get Hola mundo",
-		query,
-	});
+const getUsers = async (req = request, res = response) => {
+	try {
+		const { limit = 5, from = 0 } = req.query;
+		// NOTE: Lo que sea que ponga en una posicion, es el resultado de dicha posicion
+		const [users, totalUser] = await Promise.all([
+			User.find({ isActive: true }).skip(Number(from)).limit(Number(limit)),
+			User.countDocuments({ isActive: true }),
+		]);
+
+		res.json({
+			msg: "Obteniendo los usuarios",
+			users,
+			total: totalUser,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(404).json({
+			msg: "Contacta al administrador",
+		});
+	}
 };
 
 const postUser = async (req = request, res = response) => {
@@ -52,10 +65,15 @@ const putUser = async (req = request, res = response) => {
 	}
 };
 
-const deleUser = (req, res) => {
+const deleUser = async (req = request, res = response) => {
+	const { id } = req.params;
+	// NOTE: asi se borrar de la bd, pero se pierde la integridad referencial
+	// const user = await User.findByIdAndDelete(id);
+	const user = await User.findByIdAndUpdate(id, { isActive: false });
 	res.json({
-		msg: "delete Hola mundo",
+		msg: "Usuario dado de baja",
+		user,
 	});
 };
 
-module.exports = { getUser, postUser, putUser, deleUser };
+module.exports = { getUsers, postUser, putUser, deleUser };
