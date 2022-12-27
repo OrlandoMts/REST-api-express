@@ -7,6 +7,7 @@ class Server {
 		this.app = express();
 		this.port = process.env.PORT;
 		this.pathUser = `${process.env.API}/user`;
+		this.pathAuth = `${process.env.API}/auth`;
 
 		// Connection db
 		this.conectDB();
@@ -30,6 +31,7 @@ class Server {
 
 	routes() {
 		// Ruta personalizada
+		this.app.use(this.pathAuth, require("../routes/auth"));
 		this.app.use(this.pathUser, require("../routes/user"));
 	}
 

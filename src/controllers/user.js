@@ -40,7 +40,9 @@ const postUser = async (req = request, res = response) => {
 			user,
 		});
 	} catch (error) {
-		console.log(error);
+		res.status(400).json({
+			msg: "Contacta al administrador",
+		});
 	}
 };
 
@@ -59,21 +61,29 @@ const putUser = async (req = request, res = response) => {
 			user,
 		});
 	} catch (error) {
-		res.status(404).json({
+		console.log(error);
+		res.status(400).json({
 			msg: "Contacta al administrador",
 		});
 	}
 };
 
-const deleUser = async (req = request, res = response) => {
+const deleteUser = async (req = request, res = response) => {
 	const { id } = req.params;
-	// NOTE: asi se borrar de la bd, pero se pierde la integridad referencial
-	// const user = await User.findByIdAndDelete(id);
-	const user = await User.findByIdAndUpdate(id, { isActive: false });
-	res.json({
-		msg: "Usuario dado de baja",
-		user,
-	});
+	const uid = req.uid; //Se le asigno en el middleware validate-jwt
+
+	try {
+		const user = await User.findByIdAndUpdate(id, { isActive: false });
+		res.json({
+			msg: "Usuario dado de baja",
+			user,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			msg: "Contacta al administrador",
+		});
+	}
 };
 
-module.exports = { getUsers, postUser, putUser, deleUser };
+module.exports = { getUsers, postUser, putUser, deleteUser };
