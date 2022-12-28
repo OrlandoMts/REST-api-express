@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>No access</title>
+	</head>
+	<body>
+		<h2>Google sign in</h2>
+		<hr />
+		<div
+			id="g_id_onload"
+			data-client_id="306327557103-86dr7o0hj2rb3o4ocpbe78h4eun909cq.apps.googleusercontent.com"
+			data-callback="handleCredentialResponse"
+			data-auto_prompt="false"
+		></div>
+		<div
+			class="g_id_signin"
+			data-type="standard"
+			data-size="large"
+			data-theme="outline"
+			data-text="sign_in_with"
+			data-shape="rectangular"
+			data-logo_alignment="left"
+		></div>
+		<script src="https://accounts.google.com/gsi/client" async defer>
+			// https://developers.google.com/identity/gsi/web/guides/display-button
+		</script>
+		<script>
+			function handleCredentialResponse(response) {
+				//  https://developers.google.com/identity/gsi/web/guides/handle-credential-responses-js-functions
+
+				// console.log("token-google", response.credential);
+				const body = { id_token: response.credential };
+				fetch("http://localhost:1705/api/v1/auth/google", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(body),
+				})
+					.then((resp) => resp.json())
+					.then((resp) => {
+						console.log(resp);
+					})
+					.catch(console.warn);
+			}
+		</script>
+	</body>
+</html>

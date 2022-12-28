@@ -20,7 +20,7 @@ const {
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", [validateJWT], getUsers);
 
 router.put(
 	"/:id",
