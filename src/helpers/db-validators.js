@@ -1,6 +1,4 @@
-const Role = require("../models/role");
-const User = require("../models/user");
-
+const { Role, User } = require("../models");
 const isUserById = async (id = "") => {
 	const isUser = await User.findById(id);
 	if (!isUser) {

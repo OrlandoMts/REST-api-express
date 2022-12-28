@@ -25,6 +25,7 @@ router.get("/", [validateJWT], getUsers);
 router.put(
 	"/:id",
 	[
+		validateJWT,
 		check("id", "No es un id valido").isMongoId(),
 		check("id").custom(isUserById),
 		check("role").custom(isValidRole),
