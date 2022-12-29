@@ -29,7 +29,7 @@ const postUser = async (req = request, res = response) => {
 	try {
 		const { name, email, password, role } = req.body;
 		const user = new User({ name, email, password, role });
-		//NOTE: 1.Encriptar password. 3.Insertar en bd
+		//NOTE: 1.Encriptar password. 2.Insertar en bd
 		// 1
 		const salt = bcrypt.genSaltSync(saltRounds);
 		user.password = bcrypt.hashSync(password, salt);

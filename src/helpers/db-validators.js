@@ -1,4 +1,4 @@
-const { Role, User } = require("../models");
+const { Role, User, Category } = require("../models");
 const isUserById = async (id = "") => {
 	const isUser = await User.findById(id);
 	if (!isUser) {
@@ -20,4 +20,11 @@ const isValidEmail = async (email = "") => {
 	}
 };
 
-module.exports = { isUserById, isValidRole, isValidEmail };
+const isCategory = async (id = "") => {
+	const category = await Category.findById(id);
+	if (!category) {
+		throw new Error(`La categoria con ${id} no ha sido registrado en la bd`);
+	}
+};
+
+module.exports = { isUserById, isValidRole, isValidEmail, isCategory };
