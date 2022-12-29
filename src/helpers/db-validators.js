@@ -1,4 +1,4 @@
-const { Role, User, Category } = require("../models");
+const { Role, User, Category, Product } = require("../models");
 const isUserById = async (id = "") => {
 	const isUser = await User.findById(id);
 	if (!isUser) {
@@ -25,6 +25,32 @@ const isCategory = async (id = "") => {
 	if (!category) {
 		throw new Error(`La categoria con ${id} no ha sido registrado en la bd`);
 	}
+	if (category.isActive == false) {
+		throw new Error(`La categoria con ${id} fue dada de baja`);
+	}
 };
 
-module.exports = { isUserById, isValidRole, isValidEmail, isCategory };
+const isProduct = async (id = "") => {
+	const product = await Product.findById(id);
+	if (!product) {
+		throw new Error(`El producto ${id} no ha sido registrado en la bd`);
+	}
+	if (product.status == false) {
+		throw new Error(`El producto con ${id} fue dada de baja`);
+	}
+};
+
+const verifyPrice = async (price) => {
+	if (price < 0) {
+		throw new Error(`No se pueden ingresar precios menores a 0`);
+	}
+};
+
+module.exports = {
+	isUserById,
+	isValidRole,
+	isValidEmail,
+	isCategory,
+	isProduct,
+	verifyPrice,
+};
