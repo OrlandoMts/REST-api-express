@@ -49,16 +49,13 @@ const getProduct = async (req = request, res = response) => {
 	}
 };
 const newProduct = async (req = request, res = response) => {
-	const { price, category, description, ...rest } = req.body;
-	const name = req.body.name.toUpperCase();
+	const { status, user, ...body } = req.body;
 	const userLogged = req.userLogged;
 	try {
 		const data = {
-			name,
+			name: body.name.toUpperCase(),
 			user: userLogged._id,
-			price,
-			category,
-			description,
+			...body,
 		};
 		const product = new Product(data);
 		await product.save();
@@ -77,7 +74,9 @@ const updateProduct = async (req = request, res = response) => {
 	// no actualizar si esta en status:false
 	const { id } = req.params;
 	const { status, user, category, ...data } = req.body;
-	data.name = data.name.toUpperCase();
+	if (data.name) {
+		data.name = data.name.toUpperCase();
+	}
 	data.user = req.userLogged._id;
 
 	try {
