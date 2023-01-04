@@ -46,6 +46,23 @@ const verifyPrice = async (price) => {
 	}
 };
 
+/**
+ * Es una validacion para las collections permitidas en routes>uploads
+ */
+
+const collectionsAllow = (collection = "", collections = []) => {
+	const isInclude = collections.includes(collection);
+
+	if (!isInclude) {
+		throw new Error(`La coleccion ${collection} no es permitida`);
+	}
+
+	/**
+	 * Se implementa en todas, debido a que es una funcion. Las de arriba lo hacen implicitamente
+	 */
+	return true;
+};
+
 module.exports = {
 	isUserById,
 	isValidRole,
@@ -53,4 +70,5 @@ module.exports = {
 	isCategory,
 	isProduct,
 	verifyPrice,
+	collectionsAllow,
 };
