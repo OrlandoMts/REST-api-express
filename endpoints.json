@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "952b283b-8225-4228-877a-e9aa84142eb6",
+		"name": "Rest server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/category/list",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"category",
+								"list"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/category/63acb7ffb86419c76088c756",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"category",
+								"63acb7ffb86419c76088c756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"limpieza\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/category/new",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"category",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"enlatados\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/category/63acb7ffb86419c76088c756",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"category",
+								"63acb7ffb86419c76088c756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_url}}/category/63acb7ffb86419c76088c756",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"category",
+								"63acb7ffb86419c76088c756"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api_url}}/product/list",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"product",
+								"list"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Doritos nacho\",\r\n    \"price\": 15,\r\n    \"category\": \"63af58ea88759cae5b4cc683\",\r\n    \"description\": \"loremipsum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/product/new",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"product",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/product/63ae0e9042c33b08e40b50b8",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"product",
+								"63ae0e9042c33b08e40b50b8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"coca2\",\r\n    \"price\": 10.5,\r\n    \"description\": \"lorem-ipsum-2\",\r\n    \"available\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/product/63ae1c004f7cf4cff900801d",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"product",
+								"63ae1c004f7cf4cff900801d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/product/63ae1c0f4f7cf4cff9008021",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"product",
+								"63ae1c0f4f7cf4cff9008021"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Upload file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/C:/Users/omontes/OneDrive - Indelpro SA de CV/Documentos/INSTALACIÓN DE SAP NW RFC SDK.pdf"
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/C:/Users/omontes/OneDrive - Indelpro SA de CV/Documentos/deploy.png",
+									"disabled": true
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/C:/Users/omontes/OneDrive - Indelpro SA de CV/Documentos/mensaje-revision.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}/file/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"file",
+								""
+							],
+							"query": [
+								{
+									"key": "media",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/C:/Users/omontes/OneDrive - Indelpro SA de CV/Documentos/avances.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}/file/users/63ab16b3a6ed13d707bf2b66",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"file",
+								"users",
+								"63ab16b3a6ed13d707bf2b66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/C:/Users/omontes/OneDrive - Indelpro SA de CV/Documentos/deploy.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}/file/products/63ae0e9042c33b08e40b50b8",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"file",
+								"products",
+								"63ae0e9042c33b08e40b50b8"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Img user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/file/users/63ab16b3a6ed13d707bf2b66",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"file",
+								"users",
+								"63ab16b3a6ed13d707bf2b66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Img product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{x-token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/file/products/63af575b88759cae5b4cc648",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"file",
+								"products",
+								"63af575b88759cae5b4cc648"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{x-token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 16\",\r\n    \"email\": \"test16@montes.com\",\r\n    \"password\": \"qwerty\",\r\n    \"role\": \"USER_SALES\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/new",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{x-token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{x-token}}",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/user",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "from",
+							"value": "9",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{x-token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 15 update\",\r\n    \"email\": \"omontes@montes-2.mx\",\r\n    \"password\": \"qwerty\",\r\n    \"role\": \"USER_SALES\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/63ab18088351b457c4ad6ba0",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"63ab18088351b457c4ad6ba0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{x-token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}/user/63ab22f063ea6e2d1d5c2538",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"63ab22f063ea6e2d1d5c2538"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{x-token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"omontes@montes.com\",\r\n    \"password\": \"qwerty\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/auth/login",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google sigin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idg_token\": \"token google\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/auth/google",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"auth",
+						"google"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/search/products/sabri",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"search",
+						"products",
+						"sabri"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
