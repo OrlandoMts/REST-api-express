@@ -15,7 +15,6 @@ class Server {
 			search: "/api/v1/search",
 			file: "/api/v1/file",
 		};
-
 		// Connection db
 		this.conectDB();
 		// Middlewares
